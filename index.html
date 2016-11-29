@@ -8,7 +8,7 @@
 		<script type="text/javascript" src="d3/d3.js"></script>
 	</head>
 	<body>
-		<h1>Project 1 in IDE</h1>
+		<h1>Project 2 in IDE</h1>
 	  	<div>
 	  		<table class="names">
 		  		<tr>
@@ -21,6 +21,7 @@
 
 	    <div class="container">
         <div class="jumbotron">
+
 		 	<h2 id="plot1title">Temperature changes during last 100 years in Copenhagen</h2>
  			<svg id="visualisation1" width="1000" height="500"></svg>
         </div>
@@ -50,7 +51,7 @@
 				for (var i = 0; i < dataset.length; i++) {
 
 					var instance = {};
-					instance["year"] = dataset[i]["YEAR"];
+					instance["year"] = parseInt(dataset[i]["YEAR"]);
 					instance["temperature"] = parseFloat(dataset[i]["metANN"]);
 					data.push(instance);
 
@@ -136,7 +137,43 @@
 				  .attr('stroke-width', 2)
 				  .attr('fill', 'none');
 
+				// ==========================================================
+				// Added on mouseover event
+				// Credit: https://bl.ocks.org/mbostock/3902569
+				var focus = vis.append("g")
+				  .attr("class", "focus")
+				  .style("display", "none");
 
+				focus.append("circle")
+				  .attr("r", 4.5);
+
+				focus.append("text")
+				  .attr("x", 9)
+				  .attr("dy", ".35em");
+
+				vis.append("rect")
+				  .attr("class", "overlay")
+				  .attr("width", WIDTH)
+				  .attr("height", HEIGHT)
+				  .on("mouseover", function() { focus.style("display", null); })
+				  .on("mouseout", function() { focus.style("display", "none"); })
+				  .on("mousemove", mousemove);
+
+				var bisectDate = d3.bisector(function(d) { return d.year; }).left;
+				
+				function mousemove() {
+				var x0 = xScale.invert(d3.mouse(this)[0]),
+				    i = bisectDate(data, x0, 1),
+				    d0 = data[i - 1],
+				    d1 = data[i],
+				    d = x0 - d0.year > d1.year - x0 ? d1 : d0;
+				focus.attr("transform", "translate(" + xScale(d.year) + "," + yScale(d.temperature) + ")");
+				console.log("D0 temp: "+ d0.temperature+" ; year: "+ d0.year);
+				console.log("D1 temp: "+ d1.temperature+" ; year: "+ d1.year);
+				console.log("I: " + i);
+				focus.select("text").text(d.temperature+" °C at " + d.year);
+				};
+				// ==========================================================
 			}
 		});
 

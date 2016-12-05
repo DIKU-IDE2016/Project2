@@ -371,13 +371,13 @@ d3.csv("dataset.csv", function(error,dataset) {
 
 			var svg = d3.select("vis1ualisation3").transition();
 			// Append both axis
-				svg.select(".xAxis")
-					.duration(500)
-				    .call(xAxis);
+			svg.select(".xAxis")
+				.duration(750)
+			    .call(xAxis);
 
-				svg.select(".yAxis")
-					.duration(500)
-				    .call(yAxis);
+			svg.append(".yAxis")
+				.duration(750)
+			    .call(yAxis);
 
 			// generate the actual line
 			var lineGen = d3.line()
@@ -388,12 +388,9 @@ d3.csv("dataset.csv", function(error,dataset) {
 			    return yScale(d.temperature);
 			  });
 
-			svg.select('.line3')
-			   .duration(0)
+			svg.select('.line')
+			   .duration(750)
 			   .attr('d', lineGen(newData))
-			
-			//svg.exit().remove();
-
 		}
 		function originalLegend(newData) {
 

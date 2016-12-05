@@ -434,15 +434,37 @@ d3.csv("dataset.csv", function(error,dataset) {
 			yAxis = d3.axisLeft().scale(yScale);
 
 			var svg = d3.select("vis1ualisation3").transition();
+			svg.exit().remove();
 
-			// Append both axis
-			svg.select(".xAxis")
-				.duration(500)
+			svg.enter()
+			    .append("svg:g")
+				.attr("class", "xAxis")
+			    .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
 			    .call(xAxis);
 
-			svg.select(".yAxis")
-				.duration(500)
+			svg.enter()
+				.append("svg:g")
+				.attr("class", "yAxis")
+			    .attr("transform", "translate(" + (MARGINS.left) + ",0)")
 			    .call(yAxis);
+
+			// Append axis labels
+			svg.enter()
+				.append("text")
+			    .attr("class", "xLabel")
+			    .attr("text-anchor", "end")
+			    .attr("x", WIDTH-20)
+			    .attr("y", HEIGHT-25)
+			    .text("Year");
+
+			svg.enter()
+				.append("text")
+			    .attr("class", "yLabel")
+			    .attr("text-anchor", "end")
+			    .attr("y", 65)
+			    .attr("x", -20)
+			    .attr("transform", "rotate(-90)")
+			    .text("Temperature °C");
 
 			// generate the actual line
 			var lineGen = d3.line()
@@ -453,11 +475,15 @@ d3.csv("dataset.csv", function(error,dataset) {
 			    return yScale(d.temperature);
 			  });
 
-			svg.select('.line3')
-			   .duration(500)
-			   .attr('d', lineGen(newData));
+			svg.enter()
+			  .append('svg:path')
+			  .attr("class","line3")
+			  .attr('d', lineGen(newData))
+			  .attr('stroke', 'green')
+			  .attr('stroke-width', 2)
+			  .attr('fill', 'none');
 			
-			//svg.exit().remove();
+			
 
 		}
 		

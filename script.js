@@ -459,8 +459,8 @@ d3.csv("dataset.csv", function(error,dataset) {
 			//    .duration(500)
 			//    .attr('d', lineGen(newData));
 
-			vis3.transition('svg:path')
-			  .duration(0)
+			vis3.append('svg:path')
+			  .attr("class","line3")
 			  .attr('d', lineGen(newData))
 			  .attr('stroke', 'green')
 			  .attr('stroke-width', 2)

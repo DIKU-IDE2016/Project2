@@ -456,7 +456,6 @@ d3.csv("dataset.csv", function(error,dataset) {
 			  });
 
 			svg.select('.line3')
-			   .transition()
 			   .duration(500)
 			   .attr('d', lineGen(newData));
 

@@ -429,6 +429,6 @@ d3.csv("dataset.csv", function(error,dataset) {
 	  .on('change', function() {
 	    var newData = eval(d3.select(this).property('value'));
 	    updateLegend(newData);
-
-	});
+	   };
+});
 

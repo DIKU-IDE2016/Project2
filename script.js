@@ -406,7 +406,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 			  });
 
 			vis3.append('svg:path')
-			  .attr("class","line")
+			  .attr("class","line3")
 			  .attr('d', lineGen(newData))
 			  .attr('stroke', 'green')
 			  .attr('stroke-width', 2)
@@ -471,12 +471,12 @@ d3.csv("dataset.csv", function(error,dataset) {
 			  });
 
 			vis3.append('svg:path')
-			  .attr("class","line")
+			  .attr("class","line3")
 			  .attr('d', lineGen(newData))
 			  .attr('stroke', 'green')
 			  .attr('stroke-width', 2)
 			  .attr('fill', 'none');
-			vis3.exit().remove();
+
 
 		}
 		// generate initial legend

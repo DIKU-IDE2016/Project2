@@ -366,8 +366,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 	    			]);
 
 	    // define the axis
-	    xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d")),
-		  
+	    xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));		  
 		yAxis = d3.axisLeft().scale(yScale);
 
 		// Append both axis
@@ -375,7 +374,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 		    .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
 		    .call(xAxis);
 
-		vis3.enter().append("svg:g")
+		vis3.append("svg:g")
 		    .attr("transform", "translate(" + (MARGINS.left) + ",0)")
 		    .call(yAxis);
 
@@ -405,14 +404,13 @@ d3.csv("dataset.csv", function(error,dataset) {
 		  });
 
 		vis3.append('svg:path')
-		  .duration(0)
 		  .attr('d', lineGen(newData))
 		  .attr('stroke', 'green')
 		  .attr('stroke-width', 2)
 		  .attr('fill', 'none');
 
 	    // remove old elements
-	    vis3.exit().remove();
+	    //vis3.exit().remove();
 
 		}
 

@@ -394,7 +394,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 			   .duration(750)
 			   .attr('d', lineGen(newData))
 			
-			svg.exit().remove();
+			//svg.exit().remove();
 
 		}
 		function originalLegend(newData) {

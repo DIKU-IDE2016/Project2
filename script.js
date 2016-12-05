@@ -455,12 +455,17 @@ d3.csv("dataset.csv", function(error,dataset) {
 			    return yScale(d.temperature);
 			  });
 
-			svg.select('.line3')
-			   .duration(500)
-			   .attr('d', lineGen(newData));
+			// svg.select('.line3')
+			//    .duration(500)
+			//    .attr('d', lineGen(newData));
 
-			//svg.exit().remove();
-		}
+			vis3.transition('svg:path')
+			  .duration(0)
+			  .attr('d', lineGen(newData))
+			  .attr('stroke', 'green')
+			  .attr('stroke-width', 2)
+			  .attr('fill', 'none');
+				}
 		
 
 		// handle on click event

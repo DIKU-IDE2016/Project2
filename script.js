@@ -373,12 +373,12 @@ d3.csv("dataset.csv", function(error,dataset) {
 			// Append both axis
 			svg.select(".xAxis")
 				.duration(750)
-				.attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+				//.attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
 			    .call(xAxis);
 
 			svg.append(".yAxis")
 				.duration(750)
-				.attr("transform", "translate(" + (MARGINS.left) + ",0)")
+				//.attr("transform", "translate(" + (MARGINS.left) + ",0)")
 			    .call(yAxis);
 
 			// generate the actual line

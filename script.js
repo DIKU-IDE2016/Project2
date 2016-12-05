@@ -371,7 +371,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 		yAxis = d3.axisLeft().scale(yScale);
 
 		// Append both axis
-		vis3.enter().append("svg:g")
+		vis3.append("svg:g")
 		    .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
 		    .call(xAxis);
 
@@ -380,14 +380,14 @@ d3.csv("dataset.csv", function(error,dataset) {
 		    .call(yAxis);
 
 		// Append axis labels
-		vis3.enter().append("text")
+		vis3.append("text")
 		    .attr("class", "x label")
 		    .attr("text-anchor", "end")
 		    .attr("x", WIDTH-20)
 		    .attr("y", HEIGHT-25)
 		    .text("Year");
 
-		vis3.enter().append("text")
+		vis3.append("text")
 		    .attr("class", "y label")
 		    .attr("text-anchor", "end")
 		    .attr("y", 65)
@@ -404,7 +404,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 		    return yScale(d.temperature);
 		  });
 
-		vis3.transition('svg:path')
+		vis3.append('svg:path')
 		  .duration(0)
 		  .attr('d', lineGen(newData))
 		  .attr('stroke', 'green')

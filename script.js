@@ -455,8 +455,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 			    return yScale(d.temperature);
 			  });
 
-			svg.enter()
-			   .select('.line3')
+			svg.select('.line3')
 			   .transition()
 			   .duration(500)
 			   .attr('d', lineGen(newData));

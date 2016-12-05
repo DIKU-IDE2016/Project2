@@ -360,7 +360,6 @@ d3.csv("dataset.csv", function(error,dataset) {
 
 		    yScale = d3.scaleLinear()
 		    			.range([HEIGHT - MARGINS.top, MARGINS.bottom])
-		    			.domain([
 		    				Math.min.apply(null, newData.map(function(a){return a.temperature;})),
 		    				Math.max.apply(null, newData.map(function(a){return a.temperature;}))
 		    			]);
@@ -390,7 +389,8 @@ d3.csv("dataset.csv", function(error,dataset) {
 
 			svg.select('.line3')
 			   .duration(750)
-			   .attr('d', lineGen(newData))
+			   .attr('d', lineGen(newData));
+		    		
 		}
 		function originalLegend(newData) {
 

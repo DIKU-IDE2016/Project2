@@ -434,7 +434,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 			yAxis = d3.axisLeft().scale(yScale);
 
 			var svg = d3.select("vis1ualisation3");
-			svg.exit().remove();
+			//svg.exit().remove();
 
 			svg.append("svg:g")
 				.attr("class", "xAxis")

@@ -411,7 +411,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 			  .attr('fill', 'none');
 
 		    // remove old elements
-		    //vis3.exit().remove();
+		    vis3.exit().remove();
 
 		}
 

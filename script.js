@@ -371,15 +371,13 @@ d3.csv("dataset.csv", function(error,dataset) {
 
 			var svg = d3.select("vis1ualisation3").transition();
 			// Append both axis
-			svg.select(".xAxis")
-				.duration(0)
-				//.attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
-			    .call(xAxis);
+				svg.select(".xAxis")
+					.duration(500)
+				    .call(xAxis);
 
-			svg.select(".yAxis")
-				.duration(0)
-				//.attr("transform", "translate(" + (MARGINS.left) + ",0)")
-			    .call(yAxis);
+				svg.select(".yAxis")
+					.duration(500)
+				    .call(yAxis);
 
 			// generate the actual line
 			var lineGen = d3.line()

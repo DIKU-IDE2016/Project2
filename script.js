@@ -372,12 +372,12 @@ d3.csv("dataset.csv", function(error,dataset) {
 			var svg = d3.select("vis1ualisation3").transition();
 			// Append both axis
 			svg.select(".xAxis")
-				.duration(750)
+				.duration(0)
 				//.attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
 			    .call(xAxis);
 
-			svg.append(".yAxis")
-				.duration(750)
+			svg.select(".yAxis")
+				.duration(0)
 				//.attr("transform", "translate(" + (MARGINS.left) + ",0)")
 			    .call(yAxis);
 
@@ -391,7 +391,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 			  });
 
 			svg.select('.line3')
-			   .duration(750)
+			   .duration(0)
 			   .attr('d', lineGen(newData))
 			
 			//svg.exit().remove();

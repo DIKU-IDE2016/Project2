@@ -351,7 +351,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 	    };
 		
 		function updateLegend(newData) {
-			var appending = d3.select("#vis1ualisation3").transition();
+
 			xScale = d3.scaleLinear()
 			    		.range([MARGINS.left, WIDTH - MARGINS.right])
 			    		.domain([
@@ -370,15 +370,14 @@ d3.csv("dataset.csv", function(error,dataset) {
 		    xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));		  
 			yAxis = d3.axisLeft().scale(yScale);
 
+			var svg = d3.select("vis1ualisation3").transition();
 			// Append both axis
-			appending.select(".svg:g")
+			svg.select(".xAxis")
 				.duration(750)
-			    .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
 			    .call(xAxis);
 
-			appending.select(".svg:g")
+			svg.append(".yAxis")
 				.duration(750)
-			    .attr("transform", "translate(" + (MARGINS.left) + ",0)")
 			    .call(yAxis);
 
 			// generate the actual line
@@ -390,12 +389,9 @@ d3.csv("dataset.csv", function(error,dataset) {
 			    return yScale(d.temperature);
 			  });
 
-			appending.select('.svg:path')
-			  .duration(750)
-			  .attr('d', lineGen(newData))
-			  .attr('stroke', 'green')
-			  .attr('stroke-width', 2)
-			  .attr('fill', 'none');
+			svg.select('.line')
+			   .duration(750)
+			   .attr('d', lineGen(newData))
 
 		}
 		function originalLegend(newData) {
@@ -420,23 +416,25 @@ d3.csv("dataset.csv", function(error,dataset) {
 
 			// Append both axis
 			vis3.append("svg:g")
+				.attr("class", "xAxis")
 			    .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
 			    .call(xAxis);
 
 			vis3.append("svg:g")
+				.attr("class", "yAxis")
 			    .attr("transform", "translate(" + (MARGINS.left) + ",0)")
 			    .call(yAxis);
 
 			// Append axis labels
 			vis3.append("text")
-			    .attr("class", "x label")
+			    .attr("class", "xLabel")
 			    .attr("text-anchor", "end")
 			    .attr("x", WIDTH-20)
 			    .attr("y", HEIGHT-25)
 			    .text("Year");
 
 			vis3.append("text")
-			    .attr("class", "y label")
+			    .attr("class", "yLabel")
 			    .attr("text-anchor", "end")
 			    .attr("y", 65)
 			    .attr("x", -20)
@@ -453,6 +451,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 			  });
 
 			vis3.append('svg:path')
+			  .attr("class","line")
 			  .attr('d', lineGen(newData))
 			  .attr('stroke', 'green')
 			  .attr('stroke-width', 2)
@@ -468,6 +467,6 @@ d3.csv("dataset.csv", function(error,dataset) {
 		  .on('change', function() {
 		    var newData = eval(d3.select(this).property('value'));
 		    updateLegend(newData);
-		   });
+		 });
 	}
 });

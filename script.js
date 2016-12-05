@@ -436,14 +436,14 @@ d3.csv("dataset.csv", function(error,dataset) {
 			yAxis = d3.axisLeft().scale(yScale);
 
 			// Append both axis
-			vis3.append("svg:g")
-				.attr("class", "xAxis")
-			    .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+			var svg = d3.select("vis1ualisation3").transition();
+			// Append both axis
+			svg.select(".xAxis")
+				.duration(500)
 			    .call(xAxis);
 
-			vis3.append("svg:g")
-				.attr("class", "yAxis")
-			    .attr("transform", "translate(" + (MARGINS.left) + ",0)")
+			svg.select(".yAxis")
+				.duration(500)
 			    .call(yAxis);
 
 			// Append axis labels

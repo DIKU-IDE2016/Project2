@@ -466,7 +466,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 			  .attr('stroke-width', 2)
 			  .attr('fill', 'none');
 			
-		
+		}
 
 		// handle on click event
 		d3.select('#opts')

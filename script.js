@@ -388,7 +388,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 			    return yScale(d.temperature);
 			  });
 
-			vis3.select('.line3')
+			svg.select('.line3')
 			   .duration(0)
 			   .attr('d', lineGen(newData));
 

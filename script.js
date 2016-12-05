@@ -476,7 +476,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 			  .attr('stroke', 'green')
 			  .attr('stroke-width', 2)
 			  .attr('fill', 'none');
-
+			vis3.exit().remove();
 
 		}
 		// generate initial legend

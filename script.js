@@ -405,12 +405,9 @@ d3.csv("dataset.csv", function(error,dataset) {
 			    return yScale(d.temperature);
 			  });
 
-			vis3.append('svg:path')
-			  .attr("class","line3")
-			  .attr('d', lineGen(newData))
-			  .attr('stroke', 'green')
-			  .attr('stroke-width', 2)
-			  .attr('fill', 'none');
+			vis3.select('.line3')
+			   .duration(0)
+			   .attr('d', lineGen(newData));
 
 		}
 		function originalLegend(newData) {

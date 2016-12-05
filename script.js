@@ -351,7 +351,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 	    };
 		
 		function updateLegend(newData) {
-			var appending = vis3.transition();
+			var appending = d3.select("#vis1ualisation3").transition();
 			xScale = d3.scaleLinear()
 			    		.range([MARGINS.left, WIDTH - MARGINS.right])
 			    		.domain([
@@ -371,27 +371,71 @@ d3.csv("dataset.csv", function(error,dataset) {
 			yAxis = d3.axisLeft().scale(yScale);
 
 			// Append both axis
-			appending.enter().append("svg:g")
-				.duration(0)
+			appending.select(".svg:g")
+				.duration(750)
 			    .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
 			    .call(xAxis);
 
-			appending.enter().append("svg:g")
-				.duration(0)
+			appending.select(".svg:g")
+				.duration(750)
+			    .attr("transform", "translate(" + (MARGINS.left) + ",0)")
+			    .call(yAxis);
+
+			// generate the actual line
+			var lineGen = d3.line()
+			  .x(function(d) {
+			    return xScale(d.year);
+			  })
+			  .y(function(d) {
+			    return yScale(d.temperature);
+			  });
+
+			appending.select('.svg:path')
+			  .duration(750)
+			  .attr('d', lineGen(newData))
+			  .attr('stroke', 'green')
+			  .attr('stroke-width', 2)
+			  .attr('fill', 'none');
+
+		}
+		function originalLegend(newData) {
+
+			xScale = d3.scaleLinear()
+			    		.range([MARGINS.left, WIDTH - MARGINS.right])
+			    		.domain([
+			    			Math.min.apply(null, newData.map(function(a){return a.year;})),
+			    			Math.max.apply(null, newData.map(function(a){return a.year;}))
+			    			]);
+
+		    yScale = d3.scaleLinear()
+		    			.range([HEIGHT - MARGINS.top, MARGINS.bottom])
+		    			.domain([
+		    				Math.min.apply(null, newData.map(function(a){return a.temperature;})),
+		    				Math.max.apply(null, newData.map(function(a){return a.temperature;}))
+		    			]);
+
+		    // define the axis
+		    xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));		  
+			yAxis = d3.axisLeft().scale(yScale);
+
+			// Append both axis
+			vis3.append("svg:g")
+			    .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+			    .call(xAxis);
+
+			vis3.append("svg:g")
 			    .attr("transform", "translate(" + (MARGINS.left) + ",0)")
 			    .call(yAxis);
 
 			// Append axis labels
-			appending.enter().append("text")
-				.duration(0)
+			vis3.append("text")
 			    .attr("class", "x label")
 			    .attr("text-anchor", "end")
 			    .attr("x", WIDTH-20)
 			    .attr("y", HEIGHT-25)
 			    .text("Year");
 
-			appending.enter().append("text")
-				.duration(0)
+			vis3.append("text")
 			    .attr("class", "y label")
 			    .attr("text-anchor", "end")
 			    .attr("y", 65)
@@ -408,20 +452,16 @@ d3.csv("dataset.csv", function(error,dataset) {
 			    return yScale(d.temperature);
 			  });
 
-			appending.enter().append('svg:path')
-			  .duration(0)
+			vis3.append('svg:path')
 			  .attr('d', lineGen(newData))
 			  .attr('stroke', 'green')
 			  .attr('stroke-width', 2)
 			  .attr('fill', 'none');
 
-		    // remove old elements
-		    appending.exit().remove();
 
 		}
-
 		// generate initial legend
-		updateLegend(jan);
+		originalLegend(jan);
 
 		// handle on click event
 		d3.select('#opts')

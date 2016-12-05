@@ -434,7 +434,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 		    // define the axis
 		    xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));		  
 			yAxis = d3.axisLeft().scale(yScale);
-
+			vis3.exit().remove();
 			// Append both axis
 			var svg = d3.select("vis1ualisation3").transition();
 			// Append both axis

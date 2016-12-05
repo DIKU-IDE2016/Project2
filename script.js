@@ -310,5 +310,114 @@ d3.csv("dataset.csv", function(error,dataset) {
 		       mousex = mousex[0] + 5;
 		       vertical.style("left", mousex + "px")});
 	}
+	//  ======================Third Plot ========================= //
+	// represent monthly progression of temperature over many years using scatter plot
+	var vis1 = d3.select("#vis1ualisation1"),
+	    WIDTH = 1000,
+	    HEIGHT = 500,
+	    MARGINS = {
+	        top: 20,
+	        right: 20,
+	        bottom: 20,
+	        left: 50
+	    };
+	var jan = [];
+	var feb = [];
+	var mar = [];
+	var apr = [];
+	var may = [];
+	var jun = [];
+	var jul = [];
+	var aug = [];
+	var sep= [];
+	var oct = [];
+	var nov = [];
+	var dec = [];
+	var yavg = [];	
+	//assign values from CSV by looping over 
+	for (var i = 0; i < dataset.length; i++) {
+			year = parseInt(dataset[i]["YEAR"]);
+			// add month
+			
+			jan.push({"year":year, "temperature": parseFloat(dataset[i]["JAN"])});
+			feb.push({"year":year, "temperature": parseFloat(dataset[i]["FEB"])});
+			mar.push({"year":year, "temperature": parseFloat(dataset[i]["MAR"])});
+			apr.push({"year":year, "temperature": parseFloat(dataset[i]["APR"])});
+			may.push({"year":year, "temperature": parseFloat(dataset[i]["MAY"])});
+			jun.push({"year":year, "temperature": parseFloat(dataset[i]["JUN"])});
+			jul.push({"year":year, "temperature": parseFloat(dataset[i]["JUL"])});
+			aug.push({"year":year, "temperature": parseFloat(dataset[i]["AUG"])});
+			sep.push({"year":year, "temperature": parseFloat(dataset[i]["SEP"])});
+			oct.push({"year":year, "temperature": parseFloat(dataset[i]["OCT"])});
+			nov.push({"year":year, "temperature": parseFloat(dataset[i]["NOV"])});
+			dec.push({"year":year, "temperature": parseFloat(dataset[i]["DEC"])});
+	};
+
+	// xScale = d3.scale.ordinal()
+	//     			.range([MARGINS.left, WIDTH - MARGINS.right])
+	//     			.domain(["JAN", "FEB","MAR", "APR", "MAY", "JUN", "JUL", "AUG",
+	//     				"SEP", "OCT","NOV", "DEC"
+	//     			]);
+	xScale = d3.scaleLinear()
+	    			.range([MARGINS.left, WIDTH - MARGINS.right])
+	    			.domain([
+	    				Math.min.apply(null, jan.map(function(a){return a.year;})),
+	    				Math.max.apply(null, jan.map(function(a){return a.year;}))
+	    			]);
+
+    yScale = d3.scaleLinear()
+    			.range([HEIGHT - MARGINS.top, MARGINS.bottom])
+    			.domain([
+    				Math.min.apply(null, jan.map(function(a){return a.temperature;})),
+    				Math.max.apply(null, jan.map(function(a){return a.temperature;}))
+    			]);
+
+    // define the axis
+    xAxis = d3.axisBottom()
+	    .scale(xScale).tickFormat(d3.format("d")),
+	  
+	yAxis = d3.axisLeft()
+	    .scale(yScale);
+
+	// Append both axis
+	vis3.append("svg:g")
+	    .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+	    .call(xAxis);
+
+	vis3.append("svg:g")
+	    .attr("transform", "translate(" + (MARGINS.left) + ",0)")
+	    .call(yAxis);
+
+	// Append axis labels
+	vis3.append("text")
+	    .attr("class", "x label")
+	    .attr("text-anchor", "end")
+	    .attr("x", WIDTH-20)
+	    .attr("y", HEIGHT-25)
+	    .text("Year");
+
+	vis3.append("text")
+	    .attr("class", "y label")
+	    .attr("text-anchor", "end")
+	    .attr("y", 65)
+	    .attr("x", -20)
+	    .attr("transform", "rotate(-90)")
+	    .text("Temperature °C");
+
+	// generate the actual line
+	var lineGen = d3.line()
+	  .x(function(d) {
+	    return xScale(d.year);
+	  })
+	  .y(function(d) {
+	    return yScale(d.temperature);
+	  });
+
+	// Add the line to SVG
+	vis3.append('svg:path')
+	  .attr('d', lineGen(jan))
+	  .attr('stroke', 'green')
+	  .attr('stroke-width', 2)
+	  .attr('fill', 'none');
 });
 

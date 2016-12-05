@@ -352,14 +352,12 @@ d3.csv("dataset.csv", function(error,dataset) {
 		
 		function updateLegend(newData) {
 			xScale = d3.scaleLinear()
-			    		.range([MARGINS.left, WIDTH - MARGINS.right])
 			    		.domain([
 			    			Math.min.apply(null, newData.map(function(a){return a.year;})),
 			    			Math.max.apply(null, newData.map(function(a){return a.year;}))
 			    			]);
 
 		    yScale = d3.scaleLinear()
-		    			.range([HEIGHT - MARGINS.top, MARGINS.bottom])
 		    			.domain([
 		    				Math.min.apply(null, newData.map(function(a){return a.temperature;})),
 		    				Math.max.apply(null, newData.map(function(a){return a.temperature;}))
@@ -372,13 +370,13 @@ d3.csv("dataset.csv", function(error,dataset) {
 			var svg = d3.select("vis1ualisation3").transition();
 
 			// Append both axis
-				svg.select(".xAxis")
-					.duration(500)
-				    .call(xAxis);
+			svg.select(".xAxis")
+				.duration(500)
+			    .call(xAxis);
 
-				svg.select(".yAxis")
-					.duration(500)
-				    .call(yAxis);
+			svg.select(".yAxis")
+				.duration(500)
+			    .call(yAxis);
 
 			// generate the actual line
 			var lineGen = d3.line()
@@ -390,10 +388,10 @@ d3.csv("dataset.csv", function(error,dataset) {
 			  });
 
 			svg.select('.line3')
-			   .duration(50)
+			   .duration(500)
 			   .attr('d', lineGen(newData));
 			
-			svg.exit().remove();
+			//svg.exit().remove();
 
 		}
 		function originalLegend(newData) {

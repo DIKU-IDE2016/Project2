@@ -433,7 +433,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 		    xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));		  
 			yAxis = d3.axisLeft().scale(yScale);
 
-			var svg = d3.select("vis1ualisation3").transition();
+			var svg = d3.select("vis1ualisation3");
 			svg.exit().remove();
 
 			svg.enter()

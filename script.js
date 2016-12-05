@@ -454,13 +454,15 @@ d3.csv("dataset.csv", function(error,dataset) {
 			  .y(function(d) {
 			    return yScale(d.temperature);
 			  });
-
-			vis3.append('svg:path')
-			  .attr("class","line3")
-			  .attr('d', lineGen(newData))
-			  .attr('stroke', 'green')
-			  .attr('stroke-width', 2)
-			  .attr('fill', 'none');
+			svg.select('.line3')
+			   .duration(0)
+			   .attr('d', lineGen(newData));
+			// vis3.append('svg:path')
+			//   .attr("class","line3")
+			//   .attr('d', lineGen(newData))
+			//   .attr('stroke', 'green')
+			//   .attr('stroke-width', 2)
+			//   .attr('fill', 'none');
 		}
 		
 

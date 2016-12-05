@@ -309,7 +309,6 @@ d3.csv("dataset.csv", function(error,dataset) {
 		       mousex = d3.mouse(this);
 		       mousex = mousex[0] + 5;
 		       vertical.style("left", mousex + "px")});
-
 	}
 });
 

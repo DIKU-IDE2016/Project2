@@ -445,7 +445,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 			svg.select(".yAxis")
 				.duration(500)
 			    .call(yAxis);
-
+			svg.exit().remove();
 			// generate the actual line
 			var lineGen = d3.line()
 			  .x(function(d) {
@@ -454,7 +454,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 			  .y(function(d) {
 			    return yScale(d.temperature);
 			  });
-			svg.exit().remove();
+
 			svg.select('.line3')
 			   .duration(500)
 			   .attr('d', lineGen(newData));

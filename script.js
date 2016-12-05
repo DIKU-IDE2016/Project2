@@ -381,9 +381,12 @@ d3.csv("dataset.csv", function(error,dataset) {
 			  });
 
 			svg.select('.line3')
-			   .duration(0)
+			   .duration(50)
+			   .attr('stroke', 'green')
+			   .attr('stroke-width', 2)
+			   .attr('fill', 'none');
 			   .attr('d', lineGen(newData));
-			   
+
 			// Append both axis
 				svg.select(".xAxis")
 					.duration(500)

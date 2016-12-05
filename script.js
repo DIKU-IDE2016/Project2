@@ -310,15 +310,6 @@ d3.csv("dataset.csv", function(error,dataset) {
 		       mousex = mousex[0] + 5;
 		       vertical.style("left", mousex + "px")});
 	// Third Plot
-		var vis3 = d3.select("#vis1ualisation3"),
-	    WIDTH = 1000,
-	    HEIGHT = 500,
-	    MARGINS = {
-	        top: 20,
-	        right: 20,
-	        bottom: 20,
-	        left: 50
-	    };
 		var jan = [];
 		var feb = [];
 		var mar = [];
@@ -349,68 +340,78 @@ d3.csv("dataset.csv", function(error,dataset) {
 			nov.push({"year":year, "temperature": parseFloat(dataset[i]["NOV"])});
 			dec.push({"year":year, "temperature": parseFloat(dataset[i]["DEC"])});
 		};
+		var vis3 = d3.select("#vis1ualisation3"),
+	    WIDTH = 1000,
+	    HEIGHT = 500,
+	    MARGINS = {
+	        top: 20,
+	        right: 20,
+	        bottom: 20,
+	        left: 50
+	    };
+		
 		function updateLegend(newData) {
 
-		xScale = d3.scaleLinear()
-		    		.range([MARGINS.left, WIDTH - MARGINS.right])
-		    		.domain([
-		    			Math.min.apply(null, newData.map(function(a){return a.year;})),
-		    			Math.max.apply(null, newData.map(function(a){return a.year;}))
+			xScale = d3.scaleLinear()
+			    		.range([MARGINS.left, WIDTH - MARGINS.right])
+			    		.domain([
+			    			Math.min.apply(null, newData.map(function(a){return a.year;})),
+			    			Math.max.apply(null, newData.map(function(a){return a.year;}))
+			    			]);
+
+		    yScale = d3.scaleLinear()
+		    			.range([HEIGHT - MARGINS.top, MARGINS.bottom])
+		    			.domain([
+		    				Math.min.apply(null, newData.map(function(a){return a.temperature;})),
+		    				Math.max.apply(null, newData.map(function(a){return a.temperature;}))
 		    			]);
 
-	    yScale = d3.scaleLinear()
-	    			.range([HEIGHT - MARGINS.top, MARGINS.bottom])
-	    			.domain([
-	    				Math.min.apply(null, newData.map(function(a){return a.temperature;})),
-	    				Math.max.apply(null, newData.map(function(a){return a.temperature;}))
-	    			]);
+		    // define the axis
+		    xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));		  
+			yAxis = d3.axisLeft().scale(yScale);
 
-	    // define the axis
-	    xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));		  
-		yAxis = d3.axisLeft().scale(yScale);
+			// Append both axis
+			vis3.append("svg:g")
+			    .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+			    .call(xAxis);
 
-		// Append both axis
-		vis3.append("svg:g")
-		    .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
-		    .call(xAxis);
+			vis3.append("svg:g")
+			    .attr("transform", "translate(" + (MARGINS.left) + ",0)")
+			    .call(yAxis);
 
-		vis3.append("svg:g")
-		    .attr("transform", "translate(" + (MARGINS.left) + ",0)")
-		    .call(yAxis);
+			// Append axis labels
+			vis3.append("text")
+			    .attr("class", "x label")
+			    .attr("text-anchor", "end")
+			    .attr("x", WIDTH-20)
+			    .attr("y", HEIGHT-25)
+			    .text("Year");
 
-		// Append axis labels
-		vis3.append("text")
-		    .attr("class", "x label")
-		    .attr("text-anchor", "end")
-		    .attr("x", WIDTH-20)
-		    .attr("y", HEIGHT-25)
-		    .text("Year");
+			vis3.append("text")
+			    .attr("class", "y label")
+			    .attr("text-anchor", "end")
+			    .attr("y", 65)
+			    .attr("x", -20)
+			    .attr("transform", "rotate(-90)")
+			    .text("Temperature °C");
 
-		vis3.append("text")
-		    .attr("class", "y label")
-		    .attr("text-anchor", "end")
-		    .attr("y", 65)
-		    .attr("x", -20)
-		    .attr("transform", "rotate(-90)")
-		    .text("Temperature °C");
+			// generate the actual line
+			var lineGen = d3.line()
+			  .x(function(d) {
+			    return xScale(d.year);
+			  })
+			  .y(function(d) {
+			    return yScale(d.temperature);
+			  });
 
-		// generate the actual line
-		var lineGen = d3.line()
-		  .x(function(d) {
-		    return xScale(d.year);
-		  })
-		  .y(function(d) {
-		    return yScale(d.temperature);
-		  });
+			vis3.append('svg:path')
+			  .attr('d', lineGen(newData))
+			  .attr('stroke', 'green')
+			  .attr('stroke-width', 2)
+			  .attr('fill', 'none');
 
-		vis3.append('svg:path')
-		  .attr('d', lineGen(newData))
-		  .attr('stroke', 'green')
-		  .attr('stroke-width', 2)
-		  .attr('fill', 'none');
-
-	    // remove old elements
-	    //vis3.exit().remove();
+		    // remove old elements
+		    //vis3.exit().remove();
 
 		}
 

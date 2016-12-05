@@ -312,7 +312,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 	}
 	//  ======================Third Plot ========================= //
 	// represent monthly progression of temperature over many years using scatter plot
-	var vis1 = d3.select("#vis1ualisation1"),
+	var vis3 = d3.select("#vis1ualisation3"),
 	    WIDTH = 1000,
 	    HEIGHT = 500,
 	    MARGINS = {

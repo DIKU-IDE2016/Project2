@@ -349,51 +349,6 @@ d3.csv("dataset.csv", function(error,dataset) {
 	        bottom: 20,
 	        left: 50
 	    };
-		
-		function updateLegend(newData) {
-			xScale = d3.scaleLinear()
-			    		.domain([
-			    			Math.min.apply(null, newData.map(function(a){return a.year;})),
-			    			Math.max.apply(null, newData.map(function(a){return a.year;}))
-			    			]);
-
-		    yScale = d3.scaleLinear()
-		    			.domain([
-		    				Math.min.apply(null, newData.map(function(a){return a.temperature;})),
-		    				Math.max.apply(null, newData.map(function(a){return a.temperature;}))
-		    			]);
-
-		    // define the axis
-		    xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));		  
-			yAxis = d3.axisLeft().scale(yScale);
-
-			var svg = d3.select("vis1ualisation3").transition();
-
-			// Append both axis
-			svg.select(".xAxis")
-				.duration(500)
-			    .call(xAxis);
-
-			svg.select(".yAxis")
-				.duration(500)
-			    .call(yAxis);
-
-			// generate the actual line
-			var lineGen = d3.line()
-			  .x(function(d) {
-			    return xScale(d.year);
-			  })
-			  .y(function(d) {
-			    return yScale(d.temperature);
-			  });
-
-			svg.select('.line3')
-			   .duration(500)
-			   .attr('d', lineGen(newData));
-			
-			//svg.exit().remove();
-
-		}
 		function originalLegend(newData) {
 
 			xScale = d3.scaleLinear()
@@ -461,6 +416,51 @@ d3.csv("dataset.csv", function(error,dataset) {
 		}
 		// generate initial legend
 		originalLegend(jan);
+		function updateLegend(newData) {
+			xScale = d3.scaleLinear()
+			    		.domain([
+			    			Math.min.apply(null, newData.map(function(a){return a.year;})),
+			    			Math.max.apply(null, newData.map(function(a){return a.year;}))
+			    			]);
+
+		    yScale = d3.scaleLinear()
+		    			.domain([
+		    				Math.min.apply(null, newData.map(function(a){return a.temperature;})),
+		    				Math.max.apply(null, newData.map(function(a){return a.temperature;}))
+		    			]);
+
+		    // define the axis
+		    xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));		  
+			yAxis = d3.axisLeft().scale(yScale);
+
+			var svg = d3.select("vis1ualisation3").transition();
+
+			// Append both axis
+			svg.select(".xAxis")
+				.duration(500)
+			    .call(xAxis);
+
+			svg.select(".yAxis")
+				.duration(500)
+			    .call(yAxis);
+
+			// generate the actual line
+			var lineGen = d3.line()
+			  .x(function(d) {
+			    return xScale(d.year);
+			  })
+			  .y(function(d) {
+			    return yScale(d.temperature);
+			  });
+
+			svg.select('.line3')
+			   .duration(500)
+			   .attr('d', lineGen(newData));
+			
+			//svg.exit().remove();
+
+		}
+		
 
 		// handle on click event
 		d3.select('#opts')

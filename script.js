@@ -371,6 +371,15 @@ d3.csv("dataset.csv", function(error,dataset) {
 
 			var svg = d3.select("vis1ualisation3").transition();
 
+			// Append both axis
+				svg.select(".xAxis")
+					.duration(500)
+				    .call(xAxis);
+
+				svg.select(".yAxis")
+					.duration(500)
+				    .call(yAxis);
+
 			// generate the actual line
 			var lineGen = d3.line()
 			  .x(function(d) {
@@ -382,21 +391,9 @@ d3.csv("dataset.csv", function(error,dataset) {
 
 			svg.select('.line3')
 			   .duration(50)
-			   .attr('stroke', 'green')
-			   .attr('stroke-width', 2)
-			   .attr('fill', 'none');
 			   .attr('d', lineGen(newData));
-
-			// Append both axis
-				svg.select(".xAxis")
-					.duration(500)
-				    .call(xAxis);
-
-				svg.select(".yAxis")
-					.duration(500)
-				    .call(yAxis);
-
 			
+			svg.exit().remove();
 
 		}
 		function originalLegend(newData) {

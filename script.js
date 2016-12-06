@@ -309,7 +309,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 		       mousex = d3.mouse(this);
 		       mousex = mousex[0] + 5;
 		       vertical.style("left", mousex + "px")});
-	// Third Plot
+	//  ====================== Third Plot ========================= //
 		var jan = [];
 		var feb = [];
 		var mar = [];
@@ -340,6 +340,13 @@ d3.csv("dataset.csv", function(error,dataset) {
 			nov.push({"year":year, "temperature": parseFloat(dataset[i]["NOV"])});
 			dec.push({"year":year, "temperature": parseFloat(dataset[i]["DEC"])});
 		};
+		var lineGen = d3.line()
+			  .x(function(d) {
+			    return xScale(d.year);
+			  })
+			  .y(function(d) {
+			    return yScale(d.temperature);
+			  });
 		var vis3 = d3.select("#vis1ualisation3"),
 	    WIDTH = 1000,
 	    HEIGHT = 500,
@@ -397,13 +404,7 @@ d3.csv("dataset.csv", function(error,dataset) {
 			    .text("Temperature °C");
 
 			// generate the actual line
-			var lineGen = d3.line()
-			  .x(function(d) {
-			    return xScale(d.year);
-			  })
-			  .y(function(d) {
-			    return yScale(d.temperature);
-			  });
+			
 
 			vis3.append('svg:path')
 			  .attr("class","line3")
@@ -447,13 +448,6 @@ d3.csv("dataset.csv", function(error,dataset) {
 			    .call(yAxis);
 			
 			// generate the actual line
-			var lineGen = d3.line()
-			  .x(function(d) {
-			    return xScale(d.year);
-			  })
-			  .y(function(d) {
-			    return yScale(d.temperature);
-			  });
 
 			svg.select('.line3')
 			   .duration(0)

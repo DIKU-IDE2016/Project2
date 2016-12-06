@@ -21,7 +21,7 @@
 	  			</table>
 	  		</div>
 
-			<h1><small>How has the weather changed over the past 100 years?</small></h1>
+			<h1><small>How has the weather changed over the past 100 years in Copenhagen?</small></h1>
 	  	
 	    	<ul class="tab">
 			  	<li><a href="javascript:void(0)" class="tablinks" id="defaultOpen" onclick="openTab(event, 'vis1_box')">Visualization 1</a></li>
@@ -32,7 +32,7 @@
 
 	    	<div id="vis1_box" class="tabcontent">
 	        	<div class="jumbotron" id="vis1_div">
-			 		<h2>Temperature changes during last 100 years in Copenhagen</h2>
+			 		<h2>Yearly Temperature Changes</h2>
 	 				<svg id="vis1ualisation1" width="1000" height="500"></svg>
 	        	</div>
 	        	<h3>Discussion</h3>
@@ -64,7 +64,7 @@
  			</div>
  			<div id="vis2_box" class="tabcontent">
         		<div class="jumbotron" id ="vis2_div">
-		 			<h2>Seasonal Temperature Changes in past 100 years</h2>
+		 			<h2>Seasonal Temperature Changes</h2>
  					<svg id="vis1ualisation2" width="1000" height="850"></svg>
         		</div>
 				<h3>Discussion</h3>
@@ -90,7 +90,9 @@
  			</div>
 
  			<div id="vis3_box" class="tabcontent">
- 				<select id = "opts">
+ 				  
+        		<div class="jumbotron" id ="vis3_div">
+        		<select id = "opts">
 						<option value="jan" selected="selected">JAN</option>
 						<option value="feb" >FEB</option> 
 						<option value="mar">MAR</option>
@@ -103,9 +105,8 @@
 						<option value="oct">OCT</option>
 						<option value="nov">NOV</option>
 						<option value="dec">DEC</option>
-				</select>   
-        		<div class="jumbotron" id ="vis3_div">
-		 			<h2>Monthly Temperature Changes for the past 100 years</h2>
+				</select> 
+		 			<h2>Monthly Temperature Changes</h2>
 
 
  					<svg id="vis1ualisation3" width="1000" height="500"></svg>
@@ -134,12 +135,8 @@
  			<div id="indiv_box" class="tabcontent">
  				<table>
 					<tr>
-						<td class="fitcell"><h4>Eduards Klavins</h4></td>
+						<td class="fitcell"><h4>Eduards Klavins</h4><br/>(Answer to Question 3)</td>
 						<td class="expand">
-						
-
-							<h4 style="text-align: center;">Answer to Question 3.</h4>
-							</br>
 							<p>
 							<strong>How big data sets are reasonable to load in d3 visualizations? </strong></br>
 							D3 does not put any limits on the dataset loaded, but it will of course take a lot of time for the client to retrieve the dataset if the size of it is too large. That being said, I believe that a "reasonable size" is also dependent on your average site visitor and their internet connection, because some have 10 times faster connection speeds than others. Naturally, the only limits are the ones set by browser memory size or Node.js memory if doing server-side calculations. You have to ask yourself if you have many SVG elements in your visualization and, if so, you should think how they can be reduced so that the chart genreation on client-side is faster.
@@ -171,14 +168,17 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="fitcell"><h4>Ehsan Khaveh</h4></td>
-						<td class="expand">t vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</td>
+						<td class="fitcell"><h4>Ehsan Khaveh</h4><br/>(Answer to Question 2)</td>
+						<td class="expand">Our visualizations can be made a lot more readable, by using some simple interactivity elements in them. For instance, rapid short fluctuations in the first and third visualization make the chart very hard to read and interpret. The chart can be improved by adding some basic intercative elements such as an indicator of the value of the line chart in a certain year as we move the cursor on different parts of the chart. The mockup below shows such interactivity:<br/><br/>
+						<img src="vis1_interactive.gif">
+
+						A similar improvement can be added to the second visualization. As it can be seen the charts are nicely aligned to make it easy for readers to compare the termperature across seasons in a particular year. The is in fact the best we can do in a static visualization like that. However, adding a simple vertical line that follows the cursor along different charts and preferably indicates the measure (like in the previous mockup) too, could make the chart extremely better in showing the data it is intended to present. Mockup below is a similar implementation of the such dynamic visualization:<br/><br/>
+						<img src="vis2_interactive.gif">
+						</td>
 					</tr>
 					<tr>
-						<td class="fitcell"><h4>Olugbenga Oti</h4></td>
+						<td class="fitcell"><h4>Olugbenga Oti</h4><br/>(Answer to Question 1)</td>
 						<td class="expand">
-							<h4 style="text-align: center;">Answer to Question 1.</h4>
-							</br>
 							NASA has a lot of data on global temperature in the past 100 years. I believe the Cabon dioxide levels and sea levels will be information that will give the article a deeper meaning. However, the data they have is only available on a global scale not by country. The visualization for Carbon dioxide levels is shown here: <a href="http://climate.nasa.gov/evidence/">NASA's evidence</a>
 						</td>
 					</tr>

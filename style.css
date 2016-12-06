@@ -124,3 +124,7 @@ ul.tab li a:focus, .active {background-color: #ccc;}
     border: 1px solid #ccc;
     border-top: none;
 }
+
+#opts {
+  float: right;
+}

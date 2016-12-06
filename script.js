@@ -130,44 +130,6 @@ d3.csv("dataset.csv", function(error,dataset) {
 		  .attr('fill', 'none');
 
 		// ==========================================================
-		//Added on mouseover event
-		//Credit: https://bl.ocks.org/mbostock/3902569
-		var focus = vis1.append("g")
-		  .attr("class", "focus")
-		  .style("display", "none");
-
-		focus.append("circle")
-		  .attr("r", 4.5);
-
-		focus.append("text")
-		  .attr("x", 9)
-		  .attr("dy", ".35em");
-
-		vis1.append("rect")
-		  .attr("class", "overlay")
-		  .attr("width", WIDTH)
-		  .attr("height", HEIGHT)
-		  .on("mouseover", function() { focus.style("display", null); })
-		  .on("mouseout", function() { focus.style("display", "none"); })
-		  .on("mousemove", mousemove);
-
-		var bisectDate = d3.bisector(function(d) { return d.year; }).left;
-		
-		function mousemove() {
-			var x0 = xScale.invert(d3.mouse(this)[0]),
-			    i = bisectDate(average, x0, 1),
-			    d0 = average[i - 1],
-			    d1 = average[i],
-			    d = x0 - d0.year > d1.year - x0 ? d1 : d0;
-			focus.attr("transform", "translate(" + xScale(d.year) + "," + yScale(d.temperature) + ")");
-			console.log("D0 temp: "+ d0.temperature+" ; year: "+ d0.year);
-			console.log("D1 temp: "+ d1.temperature+" ; year: "+ d1.year);
-			console.log("I: " + i);
-			focus.select("text").text(d.temperature+" °C at " + d.year);
-		};
-
-
-		// ==========================================================
 		//  ====================== Second Plot ========================= //
 
 		var vis2 = d3.select("#vis1ualisation2")

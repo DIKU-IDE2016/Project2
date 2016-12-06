@@ -35,10 +35,32 @@
 			 		<h2>Temperature changes during last 100 years in Copenhagen</h2>
 	 				<svg id="vis1ualisation1" width="1000" height="500"></svg>
 	        	</div>
-				<h3>Motivation, method, results/discussion, and conclusions</h3>
-	 			<p>
-	 				The dataset was retrieved from <a href="http://data.giss.nasa.gov/tmp/gistemp/STATIONS/tmp_612061860000_14_0/station.txt"> here. </a>  The text file was opened and the spaces were replaced with a comma to remake this file into a CSV formated file, because that is the most common data format for datasets. Later we realized, that the dataset was formated as a TSV, but the CSV has already been made, so we decided to work on that. The decision was to plot the average temperature of each year starting from 1915 up until 2015, a span of 100 years, to see how the average temperature has risen or fallen and what is the tendency of it. Judging by the line graph created, a tentency can be seen that the average temperature is slowly rising. The highest average temperature was 10.43°C in 2007, but the lowest was 6.46°C in 1942. 
-	 			</p>
+	        	<h3>Discussion</h3>
+				<table class="discussion">
+					<tr>
+						<td class="first"><b>Motivation</b></td>
+						<td>We decided to visualize the average yearly temperature changes during the past 100 years in Copenhagen in order to see if the ovarall average has risen or fallen during the last century.</td>
+					</tr>
+					<tr>
+						<td class="first"><b>Method</b></td>
+						<td>
+						The dataset was retrieved from <a href="http://data.giss.nasa.gov/tmp/gistemp/STATIONS/tmp_612061860000_14_0/station.txt"> here. </a>  The text file was opened and the spaces were replaced with a comma to remake this file into a CSV formated file, because that is the most common data format for datasets. Later we realized, that the dataset was formated as a TSV, but the CSV has already been made, so we decided to work on that. The decision was to plot the average temperature of each year starting from 1915 up until 2015, a span of 100 years, to see how the average temperature has risen or fallen and what is the tendency of it. 
+						</td>
+					</tr>
+					<tr>
+						<td class="first"><b>Results</b></td>
+						<td>Judging by the line graph created, a tentency can be seen that the average temperature is slowly rising during past century. The highest average temperature was 10.43°C in 2007, but the lowest was 6.46°C in 1942.</td>
+					</tr>
+					<tr>
+						<td class="first"><b>Conclusion</b></td>
+						<td>
+						This visualization is helpful, because it is providing a great overview and trends of how the temperature has changed in Copenhagen. This visualization could benefit from mouseover event where the actual data is shown when moving the mouse and possibly some color changes indicating that its hotter when reaching a certain value.
+						</td>
+					</tr>
+						
+				</table>
+
+	 				 
  			</div>
  			<div id="vis2_box" class="tabcontent">
         		<div class="jumbotron" id ="vis2_div">

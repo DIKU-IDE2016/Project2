@@ -419,18 +419,19 @@ d3.csv("dataset.csv", function(error,dataset) {
 		originalLegend(jan);
 		function updateLegend(newData) {
 			xScale = d3.scaleLinear()
-			    		//.range([MARGINS.left, WIDTH - MARGINS.right])
+			    		.range([MARGINS.left, WIDTH - MARGINS.right])
 			    		.domain([
 			    			Math.min.apply(null, newData.map(function(a){return a.year;})),
 			    			Math.max.apply(null, newData.map(function(a){return a.year;}))
 			    			]);
 
 		    yScale = d3.scaleLinear()
-		    			//.range([HEIGHT - MARGINS.top, MARGINS.bottom])
+		    			.range([HEIGHT - MARGINS.top, MARGINS.bottom])
 		    			.domain([
 		    				Math.min.apply(null, newData.map(function(a){return a.temperature;})),
 		    				Math.max.apply(null, newData.map(function(a){return a.temperature;}))
 		    			]);
+
 
 		    // define the axis
 		    xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));		  
@@ -446,18 +447,21 @@ d3.csv("dataset.csv", function(error,dataset) {
 			svg.select(".yAxis")
 				.duration(500)
 			    .call(yAxis);
-			
-			// generate the actual line
 
-			svg.select('.line3')
-			   .duration(0)
-			   .attr('d', lineGen(newData));
-			// vis3.append('svg:path')
-			//   .attr("class","line3")
-			//   .attr('d', lineGen(newData))
-			//   .attr('stroke', 'green')
-			//   .attr('stroke-width', 2)
-			//   .attr('fill', 'none');
+			// How to remove old data
+			d3.select(".line3").remove();
+			// generate the actual line
+			// svg.select('.line3')
+			//    .duration(500)
+			//    .attr('d', lineGen(newData)
+
+
+			vis3.append('svg:path')
+			  .attr("class","line3")
+			  .attr('d', lineGen(newData))
+			  .attr('stroke', 'green')
+			  .attr('stroke-width', 2)
+			  .attr('fill', 'none');
 		}
 
 		// handle on click event
